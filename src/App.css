@@ -1,0 +1,23 @@
+/* THUGIL Luxury Atelier Application Styles */
+
+.thugil-app {
+  background-color: var(--warm-ivory);
+  min-height: 100vh;
+  color: var(--charcoal);
+}
+
+/* Custom Scrollbar for horizontal category tabs */
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Image zoom hover effect */
+.product-luxury-card:hover .product-card-image {
+  transform: scale(1.05);
+}
+
+/* Subtle selection glow */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--burgundy) !important;
+  box-shadow: 0 0 0 2px rgba(109, 31, 50, 0.15) !important;
+}

@@ -1,0 +1,733 @@
+/* ==========================================================================
+   THUGIL - Timeless Fabrics For Every Generation
+   Master Design System, Light & Dark Theme, and Silk Drape Animations
+   Palette:
+     Deep Burgundy: #6D1F32
+     Warm Ivory:    #F7F1E7
+     Muted Gold:    #B99A5B
+     Charcoal:      #292626
+   ========================================================================== */
+
+:root {
+  /* Brand Core Palette */
+  --burgundy: #6D1F32;
+  --burgundy-dark: #4A1220;
+  --burgundy-deep: #320B15;
+  --burgundy-light: #8E2B43;
+  --burgundy-soft: rgba(109, 31, 50, 0.08);
+  --burgundy-glow: rgba(109, 31, 50, 0.25);
+
+  --warm-ivory: #F7F1E7;
+  --warm-ivory-light: #FDFBF7;
+  --warm-ivory-muted: #EDE5D8;
+  --warm-ivory-border: #E2D7C3;
+
+  --muted-gold: #B99A5B;
+  --muted-gold-light: #D5BA82;
+  --muted-gold-pale: #F3EBD8;
+  --muted-gold-dark: #93763A;
+  --muted-gold-glow: rgba(185, 154, 91, 0.28);
+  --gold-gradient: linear-gradient(135deg, #D5BA82 0%, #B99A5B 50%, #93763A 100%);
+  --gold-shimmer: linear-gradient(90deg, transparent, rgba(213, 186, 130, 0.4), transparent);
+
+  --charcoal: #292626;
+  --charcoal-light: #3D3939;
+  --charcoal-soft: #595353;
+  --charcoal-muted: #8C8484;
+  --charcoal-bg: #1B1818;
+
+  /* Typography */
+  --font-serif-display: 'Playfair Display', Georgia, serif;
+  --font-serif-editorial: 'Cormorant Garamond', Garamond, serif;
+  --font-serif-royal: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Semantic Theme Tokens (LIGHT THEME DEFAULT) */
+  --warm-white: #FAF5EB;
+  --warm-white-pure: #FFFDF9;
+  --warm-white-muted: #EAE2D5;
+
+  --theme-bg-main: #F7F1E7;
+  --theme-bg-card: #FDFBF7;
+  --theme-bg-elevated: rgba(253, 251, 247, 0.94);
+  --theme-bg-header: rgba(247, 241, 231, 0.96);
+  --theme-text-title: #6D1F32;
+  --theme-text-body: #292626;
+  --theme-text-muted: #595353;
+  --theme-heading-color: #6D1F32;
+  --theme-body-color: #3D3939;
+  --theme-muted-color: #595353;
+  --theme-border: rgba(185, 154, 91, 0.28);
+  --theme-border-card: rgba(185, 154, 91, 0.24);
+  --theme-card-shadow: 0 8px 24px rgba(41, 38, 38, 0.06);
+
+  /* Elevations & Shadows */
+  --shadow-sm: 0 2px 8px rgba(41, 38, 38, 0.04);
+  --shadow-md: 0 8px 24px rgba(41, 38, 38, 0.07);
+  --shadow-lg: 0 16px 36px rgba(41, 38, 38, 0.12);
+  --shadow-gold: 0 10px 30px rgba(185, 154, 91, 0.2);
+  --shadow-burgundy: 0 12px 32px rgba(109, 31, 50, 0.25);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   DARK THEME PALETTE
+   Obsidian Velvet, Deep Burgundy Sheen & Luminous Warm White
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --theme-bg-main: #181515;
+  --theme-bg-card: #231E1F;
+  --theme-bg-elevated: rgba(35, 30, 31, 0.95);
+  --theme-bg-header: rgba(24, 21, 21, 0.96);
+
+  /* Luminous Warm White Typography in Dark Mode */
+  --warm-white: #FAF5EB;
+  --warm-white-pure: #FFFDF9;
+  --warm-white-muted: #EAE2D5;
+
+  --theme-text-title: #FAF5EB;
+  --theme-text-body: #FAF5EB;
+  --theme-text-muted: #EAE2D5;
+  --theme-heading-color: #FAF5EB;
+  --theme-body-color: #FAF5EB;
+  --theme-muted-color: #EAE2D5;
+
+  --warm-ivory: #FAF5EB;
+  --warm-ivory-light: #231E1F;
+  --warm-ivory-muted: #EAE2D5;
+
+  --theme-border: rgba(213, 186, 130, 0.35);
+  --theme-border-card: rgba(185, 154, 91, 0.32);
+  --theme-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+
+  --charcoal: #FAF5EB;
+  --charcoal-light: #FFFDF9;
+  --charcoal-soft: #FAF5EB;
+  --charcoal-muted: #EAE2D5;
+}
+
+/* Dark Theme Navbar Logo White Circular Background */
+[data-theme="dark"] .navbar-logo-circle {
+  background-color: #FFFFFF !important;
+  border-radius: 50% !important;
+  box-shadow: 0 3px 14px rgba(255, 255, 255, 0.32), 0 0 12px rgba(185, 154, 91, 0.5) !important;
+  border: 1.5px solid rgba(185, 154, 91, 0.7) !important;
+}
+
+[data-theme="dark"] .navbar-logo-circle img {
+  filter: none !important;
+}
+
+/* Base Reset & Smooth Scrolling */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--theme-bg-main);
+  color: var(--theme-text-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted-gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--burgundy);
+}
+
+/* Text Selection */
+::selection {
+  background: var(--burgundy);
+  color: #FDFBF7;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif-display);
+  color: var(--theme-text-title);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--theme-text-muted);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+/* Container */
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   Luxury Animation Keyframes & Saree Drape Opening
+   ========================================================================== */
+
+@keyframes goldShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGoldGlow {
+  0%, 100% { box-shadow: 0 0 12px rgba(185, 154, 91, 0.25); }
+  50% { box-shadow: 0 0 30px rgba(185, 154, 91, 0.6); }
+}
+
+@keyframes marqueeSlide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Saree Drape Unfurling Keyframes */
+@keyframes drapeCurtainLeft {
+  0% {
+    transform: translateX(0) skewX(0deg);
+  }
+  40% {
+    transform: translateX(-15%) skewX(-3deg);
+  }
+  100% {
+    transform: translateX(-105%) skewX(-8deg);
+  }
+}
+
+@keyframes drapeCurtainRight {
+  0% {
+    transform: translateX(0) skewX(0deg);
+  }
+  40% {
+    transform: translateX(15%) skewX(3deg);
+  }
+  100% {
+    transform: translateX(105%) skewX(8deg);
+  }
+}
+
+@keyframes zariTrace {
+  0% { stroke-dashoffset: 1000; opacity: 0; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes pleatUnfold {
+  0% {
+    clip-path: polygon(50% 0%, 50% 100%, 50% 100%, 50% 0%);
+    opacity: 0;
+  }
+  50% {
+    clip-path: polygon(25% 0%, 75% 0%, 85% 100%, 15% 100%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
+}
+
+/* Utility Animations */
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulseGoldGlow 3s ease-in-out infinite;
+}
+
+/* Gold Shimmer Button Effect */
+.gold-shimmer-btn {
+  position: relative;
+  overflow: hidden;
+}
+.gold-shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: var(--gold-shimmer);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.gold-shimmer-btn:hover::after {
+  animation: goldShimmer 1.1s ease;
+}
+
+/* Luxury Glassmorphism */
+.luxury-glass {
+  background: var(--theme-bg-elevated);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--theme-border);
+}
+
+/* Reduced Motion Override (A11y) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Dark Mode Component Polish Overrides - Radiant Warm White Typography
+   ========================================================================== */
+
+[data-theme="dark"] body {
+  color: var(--warm-white) !important;
+  background-color: var(--theme-bg-main) !important;
+}
+
+/* All headings glow in luminous Warm White */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--warm-white) !important;
+}
+
+/* Body paragraphs and editorial prose */
+[data-theme="dark"] p {
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] strong {
+  color: var(--warm-white-pure) !important;
+}
+
+/* Hero Section Typography */
+[data-theme="dark"] .hero-main-title {
+  color: var(--warm-white-pure) !important;
+}
+
+[data-theme="dark"] .hero-badge-text {
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] .hero-description-text {
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] .hero-metric-title {
+  color: var(--warm-white-pure) !important;
+}
+
+[data-theme="dark"] .hero-metric-sub {
+  color: var(--warm-white-muted) !important;
+}
+
+[data-theme="dark"] .hero-card-slide-title {
+  color: var(--warm-white-pure) !important;
+}
+
+[data-theme="dark"] .hero-card-slide-sub {
+  color: var(--warm-white-muted) !important;
+}
+
+[data-theme="dark"] .studio-btn {
+  color: var(--warm-white) !important;
+  border-color: var(--muted-gold) !important;
+}
+
+[data-theme="dark"] .studio-btn:hover {
+  background-color: var(--muted-gold) !important;
+  color: #181515 !important;
+  border-color: var(--muted-gold) !important;
+}
+
+/* Product Cards in Dark Mode */
+[data-theme="dark"] .product-luxury-card {
+  background-color: #231E1F !important;
+  border-color: rgba(213, 186, 130, 0.3) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .product-luxury-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(185, 154, 91, 0.25) !important;
+  border-color: var(--muted-gold) !important;
+}
+
+[data-theme="dark"] .product-card-title {
+  color: var(--warm-white-pure) !important;
+}
+
+[data-theme="dark"] .product-card-subtitle {
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] .product-card-price {
+  color: var(--warm-white-pure) !important;
+}
+
+/* Categories Navigation Pills */
+[data-theme="dark"] .cat-pill-btn {
+  background-color: rgba(35, 30, 31, 0.85) !important;
+  color: var(--warm-white) !important;
+  border-color: rgba(185, 154, 91, 0.3) !important;
+}
+
+[data-theme="dark"] .cat-pill-btn:hover {
+  border-color: var(--muted-gold-light) !important;
+  color: var(--warm-white-pure) !important;
+}
+
+/* Header & Navigation */
+[data-theme="dark"] header {
+  background-color: rgba(24, 21, 21, 0.96) !important;
+  border-bottom-color: rgba(185, 154, 91, 0.3) !important;
+}
+
+[data-theme="dark"] .nav-link {
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] .nav-link:hover {
+  color: var(--muted-gold-light) !important;
+}
+
+/* Form Controls */
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: #1E1A1B !important;
+  color: var(--warm-white) !important;
+  border-color: rgba(185, 154, 91, 0.35) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--warm-white-muted) !important;
+  opacity: 0.65;
+}
+
+/* Modals & Drawers */
+[data-theme="dark"] .quickview-modal-content,
+[data-theme="dark"] .drape-studio-modal,
+[data-theme="dark"] .cart-drawer,
+[data-theme="dark"] .wishlist-drawer,
+[data-theme="dark"] .size-guide-modal,
+[data-theme="dark"] .order-confirmation-modal,
+[data-theme="dark"] .ai-tryon-modal-container {
+  background-color: #221D1E !important;
+  color: var(--warm-white) !important;
+}
+
+[data-theme="dark"] .quickview-modal-content h1,
+[data-theme="dark"] .quickview-modal-content h2,
+[data-theme="dark"] .quickview-modal-content h3,
+[data-theme="dark"] .quickview-modal-content p,
+[data-theme="dark"] .drape-studio-modal h2,
+[data-theme="dark"] .drape-studio-modal label,
+[data-theme="dark"] .ai-tryon-modal-container h2,
+[data-theme="dark"] .ai-tryon-modal-container h3,
+[data-theme="dark"] .ai-tryon-modal-container h4 {
+  color: var(--warm-white) !important;
+}
+
+/* AI Virtual Trial Room Responsive Styles */
+@media (max-width: 960px) {
+  .ai-tryon-grid-columns {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto !important;
+  }
+  .ai-tryon-modal-container {
+    height: 96vh !important;
+    max-height: 96vh !important;
+  }
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .ai-tryon-dual-canvas {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.wardrobe-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(109, 31, 50, 0.12);
+  border-color: var(--muted-gold) !important;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
+/* ==========================================================================
+   THUGIL Official AI Try-On Floating Button & Tooltip
+   Enlarged icon: 76-88px desktop (82px), 64-72px mobile (68px)
+   ========================================================================== */
+.floating-ai-tryon-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 88;
+}
+
+.floating-ai-tryon-btn {
+  background: linear-gradient(135deg, #4A1220 0%, #6D1F32 50%, #350B16 100%);
+  color: var(--warm-ivory);
+  border: 1.5px solid var(--muted-gold);
+  border-radius: 9999px;
+  padding: 0.48rem 1.6rem 0.48rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: 0 12px 36px rgba(74, 18, 32, 0.5), 0 0 25px rgba(185, 154, 91, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  user-select: none;
+  position: relative;
+  outline: none;
+}
+
+.floating-ai-tryon-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: var(--muted-gold-light);
+  box-shadow: 0 16px 45px rgba(74, 18, 32, 0.7), 0 0 35px rgba(213, 186, 130, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+.floating-ai-tryon-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.floating-ai-tryon-btn:focus-visible {
+  outline: 2.5px solid var(--muted-gold-light);
+  outline-offset: 3px;
+  box-shadow: 0 0 28px rgba(213, 186, 130, 0.75);
+}
+
+/* Luminous Medallion: 82px diameter on desktop (within 76-88px requirement) */
+.thugil-tryon-medallion {
+  width: 82px;
+  height: 82px;
+  min-width: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFFDF9 0%, #FAF5EB 70%, #EFE8DA 100%);
+  border: 1.5px solid var(--muted-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32), inset 0 1px 2px rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.floating-ai-tryon-btn:hover .thugil-tryon-medallion {
+  transform: rotate(6deg) scale(1.05);
+  border-color: var(--muted-gold-light);
+}
+
+/* Authentic thugil.png shuttle image scaled inside the medallion */
+.thugil-tryon-icon-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* Clean "AI TRY-ON" Label */
+.thugil-tryon-content {
+  display: flex;
+  align-items: center;
+}
+
+.thugil-tryon-label {
+  font-family: var(--font-serif-royal), 'Cinzel', Georgia, serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #FAF5EB;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+/* Tooltip: “Try Your Outfit with AI” */
+.floating-tryon-tooltip {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  right: 0;
+  background: rgba(24, 20, 21, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.2px solid var(--muted-gold);
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  color: #FAF5EB;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 14px rgba(185, 154, 91, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+  z-index: 1000;
+}
+
+.floating-tryon-tooltip.visible,
+.floating-ai-tryon-btn:hover + .floating-tryon-tooltip,
+.floating-ai-tryon-btn:focus-visible + .floating-tryon-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.floating-tryon-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 36px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--muted-gold) transparent transparent transparent;
+}
+
+/* Responsive: 64-72px on mobile (68px) */
+@media (max-width: 768px) {
+  .floating-ai-tryon-container {
+    bottom: 1.5rem;
+    right: 1.2rem;
+  }
+
+  .floating-ai-tryon-btn {
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.42rem 0.48rem 0.52rem;
+    border-radius: 24px;
+    width: auto;
+    height: auto;
+  }
+
+  .thugil-tryon-medallion {
+    width: 68px;
+    height: 68px;
+    min-width: 68px;
+  }
+
+  .thugil-tryon-icon-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .thugil-tryon-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+
+  .floating-tryon-tooltip {
+    right: 50%;
+    transform: translateX(50%) translateY(6px);
+  }
+
+  .floating-tryon-tooltip.visible {
+    transform: translateX(50%) translateY(0);
+  }
+
+  .floating-tryon-tooltip::after {
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+
+

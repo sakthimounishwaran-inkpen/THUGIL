@@ -1,0 +1,106 @@
+{
+  "users": {
+    "test_client": {
+      "clientId": "test_client",
+      "trialsRemaining": 2,
+      "totalUsed": 0,
+      "createdAt": "2026-10-14T17:40:21.959Z",
+      "lastActive": "2026-10-14T17:40:21.959Z"
+    },
+    "patron_n6kqcbsl_mv8ecyqh": {
+      "clientId": "patron_n6kqcbsl_mv8ecyqh",
+      "trialsRemaining": 2,
+      "totalUsed": 0,
+      "createdAt": "2026-10-14T17:41:51.451Z",
+      "lastActive": "2026-10-15T17:30:31.317Z"
+    },
+    "test_patron_1792000591926": {
+      "clientId": "test_patron_1792000591926",
+      "trialsRemaining": 2,
+      "totalUsed": 0,
+      "createdAt": "2026-10-14T17:56:31.967Z",
+      "lastActive": "2026-10-14T17:56:31.982Z"
+    },
+    "test_patron_1792000679476": {
+      "clientId": "test_patron_1792000679476",
+      "trialsRemaining": 10,
+      "totalUsed": 0,
+      "createdAt": "2026-10-14T17:57:59.561Z",
+      "lastActive": "2026-10-14T17:57:59.624Z"
+    }
+  },
+  "accessRequests": [
+    {
+      "id": "REQ-B60628D6",
+      "clientId": "test_patron_1792000679476",
+      "name": "Princess Radhika",
+      "mobile": "+91 98765 43210",
+      "email": "radhika@royalpatron.com",
+      "preferredCategory": "Traditional Silk",
+      "consentGiven": true,
+      "status": "approved",
+      "grantedCredits": 3,
+      "createdAt": "2026-10-14T17:57:59.589Z",
+      "approvedAt": "2026-10-14T17:57:59.612Z"
+    },
+    {
+      "id": "REQ-C63DFCDF",
+      "clientId": "test_patron_1792000591926",
+      "name": "Princess Radhika",
+      "mobile": "+91 98765 43210",
+      "email": "radhika@royalpatron.com",
+      "preferredCategory": "Traditional Silk",
+      "consentGiven": true,
+      "status": "pending",
+      "grantedCredits": 0,
+      "createdAt": "2026-10-14T17:56:31.995Z",
+      "approvedAt": null
+    }
+  ],
+  "jobs": [
+    {
+      "id": "JOB-D7DE56B830",
+      "clientId": "patron_n6kqcbsl_mv8ecyqh",
+      "garmentId": "thugil-w-05",
+      "garmentName": "The Noor Chanderi Embroidered Kurti",
+      "status": "failed",
+      "provider": "None Configured",
+      "error": "AI_PROVIDER_KEY_MISSING",
+      "timestamp": "2026-10-15T17:30:31.332Z"
+    },
+    {
+      "id": "JOB-233990CD07",
+      "clientId": "patron_n6kqcbsl_mv8ecyqh",
+      "garmentId": "thugil-m-02",
+      "garmentName": "The Mayilkannu Pure Gold Zari Veshti & Dhoti",
+      "status": "failed",
+      "provider": "None Configured",
+      "error": "AI_PROVIDER_KEY_MISSING",
+      "timestamp": "2026-10-14T18:00:53.305Z"
+    },
+    {
+      "id": "JOB-B2D25C5EA1",
+      "clientId": "test_patron_1792000679476",
+      "garmentId": "thugil-w-1",
+      "garmentName": "The Rajkumari Heirloom Drape",
+      "status": "failed",
+      "provider": "None Configured",
+      "error": "AI_PROVIDER_KEY_MISSING",
+      "timestamp": "2026-10-14T17:57:59.580Z"
+    },
+    {
+      "id": "JOB-EB3E55D069",
+      "clientId": "test_patron_1792000591926",
+      "garmentId": "thugil-w-1",
+      "garmentName": "The Rajkumari Heirloom Drape",
+      "status": "failed",
+      "provider": "None Configured",
+      "error": "AI_PROVIDER_KEY_MISSING",
+      "createdAt": "2026-10-14T17:56:31.983Z"
+    }
+  ],
+  "config": {
+    "freeTrialLimit": 2,
+    "defaultGrantedCredits": 3
+  }
+}
