@@ -55,6 +55,7 @@ export default function AITrialRoomModal() {
 
   // Wardrobe Panel Tabs & Filtering
   const [wardrobeTab, setWardrobeTab] = useState("wishlist"); // "wishlist" | "catalog"
+  const [mobileTab, setMobileTab] = useState("canvas"); // "canvas" | "wardrobe" (for <= 900px screens)
   const [catalogDepartment, setCatalogDepartment] = useState("All");
   const [catalogSearch, setCatalogSearch] = useState("");
 
@@ -209,6 +210,7 @@ export default function AITrialRoomModal() {
     }
     setTryOnResult(null);
     setErrorNotice(null);
+    setMobileTab("canvas");
   };
 
   // Execute AI Virtual Try-On
@@ -349,6 +351,7 @@ export default function AITrialRoomModal() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="ai-trial-title"
+          className="ai-tryon-modal-overlay"
           style={{
             position: "fixed",
             top: 0,
@@ -387,6 +390,7 @@ export default function AITrialRoomModal() {
           >
             {/* ----------------- MODAL HEADER ----------------- */}
             <div
+              className="ai-tryon-modal-header"
               style={{
                 padding: "1rem 1.6rem",
                 backgroundColor: "var(--burgundy)",
@@ -398,8 +402,9 @@ export default function AITrialRoomModal() {
                 color: "#FAF5EB"
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+              <div className="ai-tryon-header-left" style={{ display: "flex", alignItems: "center", gap: "0.85rem", minWidth: 0 }}>
                 <div
+                  className="ai-tryon-header-logo"
                   style={{
                     width: "38px",
                     height: "38px",
@@ -410,7 +415,8 @@ export default function AITrialRoomModal() {
                     alignItems: "center",
                     justifyContent: "center",
                     boxShadow: "0 2px 6px rgba(0, 0, 0, 0.25)",
-                    overflow: "hidden"
+                    overflow: "hidden",
+                    flexShrink: 0
                   }}
                 >
                   <img
@@ -419,10 +425,11 @@ export default function AITrialRoomModal() {
                     style={{ width: "26px", height: "26px", objectFit: "contain" }}
                   />
                 </div>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", flexWrap: "wrap" }}>
                     <h2
                       id="ai-trial-title"
+                      className="ai-tryon-header-title"
                       style={{
                         margin: 0,
                         fontFamily: "var(--font-serif-royal)",
@@ -435,6 +442,7 @@ export default function AITrialRoomModal() {
                       THUGIL AI VIRTUAL TRIAL ROOM
                     </h2>
                     <span
+                      className="ai-tryon-header-badge"
                       style={{
                         fontSize: "0.65rem",
                         letterSpacing: "0.08em",
@@ -444,13 +452,15 @@ export default function AITrialRoomModal() {
                         padding: "0.15rem 0.45rem",
                         borderRadius: "8px",
                         fontWeight: 600,
-                        color: "var(--muted-gold-light)"
+                        color: "var(--muted-gold-light)",
+                        whiteSpace: "nowrap"
                       }}
                     >
                       Imperial Fitting Suite
                     </span>
                   </div>
                   <p
+                    className="ai-tryon-header-subtitle"
                     style={{
                       margin: "0.15rem 0 0",
                       fontSize: "0.78rem",
@@ -464,9 +474,10 @@ export default function AITrialRoomModal() {
               </div>
 
               {/* Header Right Badges & Controls */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
+              <div className="ai-tryon-header-right" style={{ display: "flex", alignItems: "center", gap: "0.8rem", flexShrink: 0 }}>
                 {/* Trial Credits Chip */}
                 <div
+                  className="ai-tryon-credits-chip"
                   style={{
                     backgroundColor: "rgba(24, 21, 21, 0.6)",
                     border: "1px solid var(--muted-gold)",
@@ -503,6 +514,7 @@ export default function AITrialRoomModal() {
                 <button
                   onClick={() => setIsAIAdminOpen(true)}
                   title="Atelier Staff Management Portal"
+                  className="ai-tryon-admin-btn hover:scale-105"
                   style={{
                     backgroundColor: "rgba(24, 21, 21, 0.4)",
                     border: "1px solid rgba(185, 154, 91, 0.4)",
@@ -516,7 +528,6 @@ export default function AITrialRoomModal() {
                     cursor: "pointer",
                     transition: "all 0.2s ease"
                   }}
-                  className="hover:scale-105"
                 >
                   <Shield size={16} />
                 </button>
@@ -525,6 +536,7 @@ export default function AITrialRoomModal() {
                 <button
                   onClick={() => setIsAITrialRoomOpen(false)}
                   aria-label="Close Virtual Trial Room"
+                  className="ai-tryon-close-btn"
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.12)",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
@@ -544,6 +556,26 @@ export default function AITrialRoomModal() {
               </div>
             </div>
 
+            {/* MOBILE VIEW TOGGLE: SWITCH BETWEEN CANVAS & WARDROBE (Only displayed <= 900px) */}
+            <div className="ai-tryon-mobile-tab-bar">
+              <button
+                type="button"
+                onClick={() => setMobileTab("canvas")}
+                className={`ai-tryon-mobile-tab-btn ${mobileTab === "canvas" ? "active" : ""}`}
+              >
+                <Sparkles size={14} color={mobileTab === "canvas" ? "var(--muted-gold-light)" : "currentColor"} />
+                <span>1. Fitting Canvas {selectedGarment ? "✦ (Outfit Slotted)" : ""}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileTab("wardrobe")}
+                className={`ai-tryon-mobile-tab-btn ${mobileTab === "wardrobe" ? "active" : ""}`}
+              >
+                <Layers size={14} color={mobileTab === "wardrobe" ? "var(--muted-gold-light)" : "currentColor"} />
+                <span>2. Wardrobe & Catalog ({wishlistProducts.length})</span>
+              </button>
+            </div>
+
             {/* ----------------- MODAL BODY: 2-COLUMN LUXURY WORKSPACE ----------------- */}
             <div
               style={{
@@ -558,6 +590,7 @@ export default function AITrialRoomModal() {
                   LEFT PANEL: CUSTOMER DRESSING CANVAS & PREVIEW
                   ============================================================== */}
               <div
+                className={`ai-tryon-panel-left ${mobileTab === "canvas" ? "mobile-active" : ""}`}
                 style={{
                   padding: "1.4rem",
                   overflowY: "auto",
@@ -801,7 +834,7 @@ export default function AITrialRoomModal() {
                           Complimentary trial limit reached (2 sessions). Provide your contact details to receive additional VIP AI trial credits approved by THUGIL Atelier staff.
                         </p>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                        <div className="ai-tryon-form-row-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
                           <div>
                             <label style={{ display: "block", fontSize: "0.74rem", fontWeight: 700, marginBottom: "0.25rem" }}>
                               Full Name *
@@ -844,7 +877,7 @@ export default function AITrialRoomModal() {
                           </div>
                         </div>
 
-                        <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "0.75rem" }}>
+                        <div className="ai-tryon-form-row-2" style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "0.75rem" }}>
                           <div>
                             <label style={{ display: "block", fontSize: "0.74rem", fontWeight: 700, marginBottom: "0.25rem" }}>
                               Email Address *
@@ -1332,6 +1365,27 @@ export default function AITrialRoomModal() {
                             >
                               Drag any piece from your wishlist or catalog on the right, or click "✦ Slot In"
                             </span>
+                            <button
+                              type="button"
+                              onClick={() => setMobileTab("wardrobe")}
+                              className="ai-tryon-mobile-browse-btn"
+                              style={{
+                                marginTop: "0.5rem",
+                                backgroundColor: "var(--burgundy)",
+                                color: "#FAF5EB",
+                                border: "1px solid var(--muted-gold)",
+                                borderRadius: "16px",
+                                padding: "0.38rem 0.85rem",
+                                fontSize: "0.72rem",
+                                fontWeight: 700,
+                                cursor: "pointer",
+                                alignItems: "center",
+                                gap: "0.35rem"
+                              }}
+                            >
+                              <Layers size={13} color="var(--muted-gold-light)" />
+                              <span>Select Outfit from Wardrobe →</span>
+                            </button>
                           </div>
                         </div>
                       )}
@@ -1753,6 +1807,7 @@ export default function AITrialRoomModal() {
                   RIGHT PANEL: WARDROBE (WISHLIST & CATALOG BROWSER)
                   ============================================================== */}
               <div
+                className={`ai-tryon-panel-right ${mobileTab === "wardrobe" ? "mobile-active" : ""}`}
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -2222,6 +2277,34 @@ export default function AITrialRoomModal() {
                         );
                       })}
                     </div>
+
+                    {/* Mobile Quick Return Sticky Banner */}
+                    <div className="ai-tryon-mobile-return-banner">
+                      <span style={{ fontSize: "0.74rem", color: "var(--theme-text-body)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1 }}>
+                        {selectedGarment ? `✓ Slotted: ${selectedGarment.name}` : "Tap ✦ Slot In on any piece"}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setMobileTab("canvas")}
+                        style={{
+                          backgroundColor: "var(--burgundy)",
+                          color: "#FAF5EB",
+                          border: "1px solid var(--muted-gold)",
+                          borderRadius: "16px",
+                          padding: "0.4rem 0.85rem",
+                          fontSize: "0.74rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.35rem",
+                          flexShrink: 0
+                        }}
+                      >
+                        <span>View Fitting Canvas</span>
+                        <ArrowRight size={13} />
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -2229,6 +2312,185 @@ export default function AITrialRoomModal() {
           </div>
         </div>
       )}
+
+      {/* Responsive Styles for AI Virtual Trial Room */}
+      <style>{`
+        /* Desktop defaults */
+        .ai-tryon-mobile-tab-bar {
+          display: none;
+        }
+        .ai-tryon-mobile-return-banner {
+          display: none;
+        }
+        .ai-tryon-mobile-browse-btn {
+          display: none;
+        }
+
+        /* Responsive Breakpoint 1: Tablet / Small Desktop (<= 900px) */
+        @media (max-width: 900px) {
+          .ai-tryon-modal-container {
+            height: 95vh !important;
+            max-height: 96vh !important;
+            border-radius: 14px !important;
+          }
+
+          .ai-tryon-grid-columns {
+            grid-template-columns: 1fr !important;
+            position: relative;
+          }
+
+          .ai-tryon-mobile-tab-bar {
+            display: flex !important;
+            background-color: var(--theme-bg-elevated);
+            border-bottom: 1.5px solid var(--muted-gold);
+            padding: 0.35rem 0.6rem;
+            gap: 0.45rem;
+            flex-shrink: 0;
+            z-index: 10;
+          }
+
+          .ai-tryon-mobile-tab-btn {
+            flex: 1;
+            padding: 0.55rem 0.6rem;
+            border-radius: 8px;
+            border: 1px solid var(--theme-border);
+            background-color: var(--theme-bg-main);
+            color: var(--theme-text-muted);
+            font-size: 0.74rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-serif-royal);
+            letter-spacing: 0.03em;
+          }
+
+          .ai-tryon-mobile-tab-btn.active {
+            background-color: var(--burgundy);
+            color: #FAF5EB;
+            border-color: var(--muted-gold);
+            box-shadow: 0 2px 8px rgba(109, 31, 50, 0.3);
+          }
+
+          .ai-tryon-panel-left {
+            display: none !important;
+            border-right: none !important;
+            height: 100% !important;
+          }
+
+          .ai-tryon-panel-left.mobile-active {
+            display: flex !important;
+          }
+
+          .ai-tryon-panel-right {
+            display: none !important;
+            height: 100% !important;
+          }
+
+          .ai-tryon-panel-right.mobile-active {
+            display: flex !important;
+          }
+
+          .ai-tryon-mobile-browse-btn {
+            display: inline-flex !important;
+          }
+
+          .ai-tryon-mobile-return-banner {
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            padding: 0.65rem 0.85rem;
+            background-color: var(--theme-bg-elevated);
+            border-top: 1.5px solid var(--muted-gold);
+            position: sticky;
+            bottom: 0;
+            z-index: 20;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+          }
+        }
+
+        /* Responsive Breakpoint 2: Mobile Devices (<= 640px) */
+        @media (max-width: 640px) {
+          .ai-tryon-modal-overlay {
+            padding: 0.35rem !important;
+          }
+
+          .ai-tryon-modal-container {
+            height: 97vh !important;
+            max-height: 98vh !important;
+            border-radius: 12px !important;
+          }
+
+          .ai-tryon-modal-header {
+            padding: 0.65rem 0.85rem !important;
+            gap: 0.5rem !important;
+          }
+
+          .ai-tryon-header-logo {
+            width: 30px !important;
+            height: 30px !important;
+          }
+
+          .ai-tryon-header-logo img {
+            width: 20px !important;
+            height: 20px !important;
+          }
+
+          .ai-tryon-header-title {
+            font-size: 0.92rem !important;
+            letter-spacing: 0.04em !important;
+            line-height: 1.2 !important;
+          }
+
+          .ai-tryon-header-badge {
+            display: none !important;
+          }
+
+          .ai-tryon-header-subtitle {
+            display: none !important;
+          }
+
+          .ai-tryon-credits-chip {
+            padding: 0.25rem 0.55rem !important;
+            font-size: 0.68rem !important;
+          }
+
+          .ai-tryon-admin-btn,
+          .ai-tryon-close-btn {
+            width: 30px !important;
+            height: 30px !important;
+          }
+
+          .ai-tryon-panel-left {
+            padding: 0.85rem !important;
+            gap: 0.9rem !important;
+          }
+        }
+
+        /* Responsive Breakpoint 3: Narrow Phones (<= 520px) */
+        @media (max-width: 520px) {
+          .ai-tryon-dual-canvas {
+            grid-template-columns: 1fr !important;
+            gap: 0.85rem !important;
+          }
+
+          .ai-tryon-form-row-2 {
+            grid-template-columns: 1fr !important;
+            gap: 0.5rem !important;
+          }
+
+          .ai-tryon-credits-chip span {
+            max-width: 110px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      `}</style>
     </>
   );
 }

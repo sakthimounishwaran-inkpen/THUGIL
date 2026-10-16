@@ -83,8 +83,8 @@ export default function BestsellersSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-            gap: "2.5rem"
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+            gap: "2rem"
           }}
         >
           {bestsellers.map((product) => (

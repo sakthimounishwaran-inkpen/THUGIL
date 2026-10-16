@@ -90,7 +90,7 @@ function MainContent() {
           boxShadow: "0 10px 25px rgba(109, 31, 50, 0.4), 0 0 15px rgba(185, 154, 91, 0.4)",
           transition: "all 0.3s ease"
         }}
-        className="gold-shimmer-btn animate-float"
+        className="floating-bespoke-studio-btn gold-shimmer-btn animate-float"
       >
         <Scissors size={16} color="var(--muted-gold-light)" />
         <span>Bespoke Studio</span>

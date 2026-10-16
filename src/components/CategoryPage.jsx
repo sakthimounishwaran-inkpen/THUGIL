@@ -900,9 +900,9 @@ export default function CategoryPage() {
                   display: "grid",
                   gridTemplateColumns:
                     gridCols === 4
-                      ? "repeat(auto-fill, minmax(280px, 1fr))"
-                      : "repeat(auto-fill, minmax(340px, 1fr))",
-                  gap: "2.5rem"
+                      ? "repeat(auto-fill, minmax(min(100%, 260px), 1fr))"
+                      : "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+                  gap: "2rem"
                 }}
               >
                 {sortedProducts.map((product) => (
@@ -1023,8 +1023,8 @@ export default function CategoryPage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-                gap: "2rem"
+                gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+                gap: "1.8rem"
               }}
             >
               {recommendations.map((rec) => (

@@ -86,8 +86,8 @@ export default function PersonalizedRecommendations() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-            gap: "2.4rem"
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+            gap: "2rem"
           }}
         >
           {recommended.map((prod) => (

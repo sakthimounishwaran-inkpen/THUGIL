@@ -25,6 +25,7 @@ export default function SizeGuideModal() {
       onClick={() => setIsSizeGuideOpen(false)}
     >
       <div
+        className="size-guide-modal-content"
         style={{
           backgroundColor: "var(--warm-ivory-light)",
           borderRadius: "18px",
@@ -222,6 +223,15 @@ export default function SizeGuideModal() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .size-guide-modal-content {
+            padding: 1.5rem 1rem !important;
+            border-radius: 14px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

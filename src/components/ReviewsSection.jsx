@@ -283,8 +283,8 @@ export default function ReviewsSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-            gap: "2rem"
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+            gap: "1.8rem"
           }}
         >
           {reviewsList.map((rev) => (

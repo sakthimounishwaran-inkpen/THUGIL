@@ -128,8 +128,8 @@ export default function NewArrivalsSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))",
-            gap: "2.4rem"
+            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+            gap: "2rem"
           }}
         >
           {displayedArrivals.slice(0, 6).map((product) => (

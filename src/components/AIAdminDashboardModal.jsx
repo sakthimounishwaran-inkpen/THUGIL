@@ -118,6 +118,7 @@ export default function AIAdminDashboardModal() {
     <div
       role="dialog"
       aria-modal="true"
+      className="ai-admin-modal-overlay"
       style={{
         position: "fixed",
         top: 0,
@@ -138,6 +139,7 @@ export default function AIAdminDashboardModal() {
       }}
     >
       <div
+        className="ai-admin-modal-container"
         style={{
           width: "100%",
           maxWidth: "1100px",
@@ -154,6 +156,7 @@ export default function AIAdminDashboardModal() {
       >
         {/* HEADER */}
         <div
+          className="ai-admin-modal-header"
           style={{
             padding: "1rem 1.6rem",
             backgroundColor: "var(--burgundy)",
@@ -191,7 +194,7 @@ export default function AIAdminDashboardModal() {
               >
                 THUGIL ATELIER STAFF CONTROL
               </h3>
-              <p style={{ margin: 0, fontSize: "0.74rem", color: "rgba(250, 245, 235, 0.75)" }}>
+              <p className="ai-admin-header-subtitle" style={{ margin: 0, fontSize: "0.74rem", color: "rgba(250, 245, 235, 0.75)" }}>
                 AI Virtual Trial Room Management, Lead Approvals & Audit Trail
               </p>
             </div>
@@ -439,7 +442,10 @@ export default function AIAdminDashboardModal() {
                 display: "flex",
                 borderBottom: "1px solid var(--theme-border)",
                 backgroundColor: "var(--theme-bg-elevated)",
-                padding: "0 1.4rem"
+                padding: "0 1.4rem",
+                overflowX: "auto",
+                whiteSpace: "nowrap",
+                WebkitOverflowScrolling: "touch"
               }}
             >
               {[
@@ -522,12 +528,14 @@ export default function AIAdminDashboardModal() {
                       No VIP customer access requests submitted yet.
                     </div>
                   ) : (
+                    <div style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
                     <table
                       style={{
                         width: "100%",
                         borderCollapse: "collapse",
                         fontSize: "0.78rem",
-                        textAlign: "left"
+                        textAlign: "left",
+                        minWidth: "620px"
                       }}
                     >
                       <thead>
@@ -635,6 +643,7 @@ export default function AIAdminDashboardModal() {
                           ))}
                       </tbody>
                     </table>
+                    </div>
                   )}
                 </div>
               )}
@@ -658,12 +667,14 @@ export default function AIAdminDashboardModal() {
                       No AI jobs logged yet. Test a try-on session in the trial room.
                     </div>
                   ) : (
+                    <div style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
                     <table
                       style={{
                         width: "100%",
                         borderCollapse: "collapse",
                         fontSize: "0.78rem",
-                        textAlign: "left"
+                        textAlign: "left",
+                        minWidth: "620px"
                       }}
                     >
                       <thead>
@@ -722,6 +733,7 @@ export default function AIAdminDashboardModal() {
                         ))}
                       </tbody>
                     </table>
+                    </div>
                   )}
                 </div>
               )}
@@ -930,6 +942,41 @@ export default function AIAdminDashboardModal() {
             </div>
           </div>
         )}
+        {/* Responsive Styles for AI Admin Modal */}
+        <style>{`
+          @media (max-width: 900px) {
+            .admin-stats-grid {
+              grid-template-columns: repeat(3, 1fr) !important;
+              padding: 0.75rem 1rem !important;
+              gap: 0.5rem !important;
+            }
+          }
+          @media (max-width: 640px) {
+            .ai-admin-modal-overlay {
+              padding: 0.35rem !important;
+            }
+            .ai-admin-modal-container {
+              height: 96vh !important;
+              max-height: 96vh !important;
+              border-radius: 12px !important;
+            }
+            .ai-admin-modal-header {
+              padding: 0.65rem 0.85rem !important;
+            }
+            .ai-admin-header-subtitle {
+              display: none !important;
+            }
+            .admin-stats-grid {
+              grid-template-columns: repeat(2, 1fr) !important;
+              padding: 0.6rem !important;
+            }
+          }
+          @media (max-width: 420px) {
+            .admin-stats-grid {
+              grid-template-columns: 1fr !important;
+            }
+          }
+        `}</style>
       </div>
     </div>
   );

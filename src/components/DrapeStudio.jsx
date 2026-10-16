@@ -191,6 +191,7 @@ export default function DrapeStudio() {
 
   return (
     <div
+      className="drape-studio-overlay"
       style={{
         position: "fixed",
         inset: 0,
@@ -249,6 +250,7 @@ export default function DrapeStudio() {
 
         {/* LEFT COLUMN: Interactive Atelier Visualizer Stage */}
         <div
+          className="drape-studio-stage"
           style={{
             backgroundColor: "var(--charcoal-bg)",
             padding: "2.5rem 2rem",
@@ -702,6 +704,18 @@ export default function DrapeStudio() {
         @media (max-width: 900px) {
           .drape-studio-modal {
             grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .drape-studio-overlay {
+            padding: 0.35rem !important;
+          }
+          .drape-studio-modal {
+            border-radius: 14px !important;
+            max-height: 96vh !important;
+          }
+          .drape-studio-stage {
+            padding: 1.5rem 1rem !important;
           }
         }
       `}</style>
