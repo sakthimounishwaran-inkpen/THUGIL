@@ -291,15 +291,10 @@ const OutfitsMegaMenu = forwardRef(function OutfitsMegaMenu(
           border-right: none !important;
           padding-right: 0 !important;
         }
-        .outfits-mega-menu-container::before {
-          content: "";
-          position: absolute;
-          top: -24px;
-          left: 0;
-          right: 0;
-          height: 24px;
-          background: transparent;
-          pointer-events: auto;
+        @media (max-width: 980px) {
+          .outfits-mega-menu-container {
+            display: none !important;
+          }
         }
       `}</style>
     </div>

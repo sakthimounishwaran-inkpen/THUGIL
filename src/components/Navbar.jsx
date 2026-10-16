@@ -36,7 +36,8 @@ export default function Navbar() {
     toggleTheme,
     triggerDrapeOpening,
     navigateToCategory,
-    navigateToHome
+    navigateToHome,
+    setIsAITrialRoomOpen
   } = useShop();
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -154,6 +155,7 @@ export default function Navbar() {
     <>
       {/* Top Royal Announcement Bar */}
       <div
+        className="announcement-bar"
         style={{
           backgroundColor: "var(--burgundy-dark)",
           color: "#FAF5EB",
@@ -165,21 +167,25 @@ export default function Navbar() {
           borderBottom: "1px solid rgba(185, 154, 91, 0.3)",
           position: "relative",
           zIndex: 110,
-          overflow: "hidden"
+          overflow: "hidden",
+          width: "100%",
+          boxSizing: "border-box"
         }}
       >
         <div
+          className="announcement-bar-content"
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             maxWidth: "1360px",
             margin: "0 auto",
-            fontWeight: 500
+            fontWeight: 500,
+            width: "100%"
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-            <Sparkles size={14} color="var(--muted-gold-light)" />
+          <div className="announcement-text" style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+            <Sparkles size={14} color="var(--muted-gold-light)" style={{ flexShrink: 0 }} />
             <span>Complimentary White-Glove Royal Delivery On Orders Over $500</span>
           </div>
 
@@ -202,7 +208,9 @@ export default function Navbar() {
                 textDecoration: "underline",
                 letterSpacing: "0.05em",
                 opacity: 0.9,
-                cursor: "pointer"
+                cursor: "pointer",
+                background: "none",
+                border: "none"
               }}
             >
               Atelier Size Guide
@@ -213,6 +221,7 @@ export default function Navbar() {
 
       {/* Main Luxury Header with Logo, Mega Menu, & Actions */}
       <header
+        className="navbar-header"
         style={{
           position: "sticky",
           top: 0,
@@ -226,10 +235,14 @@ export default function Navbar() {
           boxShadow: isScrolled
             ? "0 4px 20px rgba(41, 38, 38, 0.08)"
             : "0 2px 10px rgba(41, 38, 38, 0.03)",
-          transition: "all 0.3s ease"
+          transition: "all 0.3s ease",
+          width: "100%",
+          maxWidth: "100vw",
+          boxSizing: "border-box"
         }}
       >
         <div
+          className="navbar-inner"
           style={{
             maxWidth: "1360px",
             margin: "0 auto",
@@ -237,7 +250,9 @@ export default function Navbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            transition: "padding 0.3s ease"
+            transition: "padding 0.3s ease",
+            width: "100%",
+            boxSizing: "border-box"
           }}
         >
           {/* TOP-LEFT: Brand Logo - Horizontal Layout on Same Line */}
@@ -247,7 +262,8 @@ export default function Navbar() {
               alignItems: "center",
               gap: "1rem",
               cursor: "pointer",
-              flexShrink: 0
+              flexShrink: 0,
+              minWidth: 0
             }}
             onClick={navigateToHome}
             className="brand-logo-container"
@@ -294,22 +310,26 @@ export default function Navbar() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                lineHeight: 1
+                lineHeight: 1,
+                minWidth: 0
               }}
             >
               <span
+                className="brand-logo-title"
                 style={{
                   fontFamily: "var(--font-serif-display)",
                   fontSize: isScrolled ? "1.95rem" : "2.4rem",
                   fontWeight: 700,
                   color: "var(--theme-heading-color)",
                   letterSpacing: "0.1em",
-                  transition: "font-size 0.3s ease"
+                  transition: "font-size 0.3s ease",
+                  whiteSpace: "nowrap"
                 }}
               >
                 THUGIL
               </span>
               <span
+                className="brand-logo-subtitle"
                 style={{
                   fontFamily: "var(--font-serif-royal)",
                   fontSize: "0.68rem",
@@ -317,7 +337,8 @@ export default function Navbar() {
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   marginTop: "3px",
-                  fontWeight: 600
+                  fontWeight: 600,
+                  whiteSpace: "nowrap"
                 }}
               >
                 Timeless Fabrics
@@ -402,8 +423,11 @@ export default function Navbar() {
               <Scissors size={15} color="var(--muted-gold-dark)" />
               <span>Drape Studio</span>
             </button>
-          </nav>          {/* TOP-RIGHT: Search, Currency, Theme, Wishlist, Cart & Mobile Menu */}
+          </nav>
+
+          {/* TOP-RIGHT: Search, Currency, Theme, Wishlist, Cart & Mobile Menu */}
           <div
+            className="navbar-actions"
             style={{
               display: "flex",
               alignItems: "center",
@@ -411,10 +435,11 @@ export default function Navbar() {
               flexShrink: 0
             }}
           >
-            {/* Live Instant Search Bar */}
-            <div style={{ position: "relative" }}>
+            {/* Desktop Live Instant Search Bar */}
+            <div style={{ position: "relative" }} className="search-wrapper-desktop">
               {isSearchExpanded ? (
                 <div
+                  className="desktop-search-input-wrapper"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -453,7 +478,10 @@ export default function Navbar() {
                     style={{
                       padding: "0.2rem",
                       display: "flex",
-                      alignItems: "center"
+                      alignItems: "center",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer"
                     }}
                   >
                     <X size={15} color="var(--theme-muted-color)" />
@@ -472,15 +500,16 @@ export default function Navbar() {
                     color: "var(--theme-heading-color)",
                     transition: "all 0.2s ease"
                   }}
-                  className="icon-hover-btn"
+                  className="icon-hover-btn search-desktop-btn"
                 >
                   <Search size={21} />
                 </button>
               )}
 
-              {/* Instant Search Results Dropdown Preview */}
+              {/* Instant Search Results Dropdown Preview (Desktop) */}
               {isSearchExpanded && searchResults.length > 0 && (
                 <div
+                  className="search-results-dropdown desktop-search-results"
                   style={{
                     position: "absolute",
                     top: "125%",
@@ -493,7 +522,9 @@ export default function Navbar() {
                     boxShadow: "var(--shadow-lg)",
                     padding: "0.6rem 0",
                     zIndex: 150,
-                    animation: "fadeInScale 0.2s ease"
+                    animation: "fadeInScale 0.2s ease",
+                    maxHeight: "70vh",
+                    overflowY: "auto"
                   }}
                 >
                   <div
@@ -574,8 +605,26 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Currency Selector */}
-            <div style={{ position: "relative" }} className="currency-selector">
+            {/* Mobile Search Icon Button (Toggles Mobile Full-Width Search Dropdown Bar) */}
+            <button
+              onClick={() => setIsSearchExpanded((prev) => !prev)}
+              aria-label="Search Collection"
+              style={{
+                borderRadius: "50%",
+                display: "none",
+                alignItems: "center",
+                justifyContent: "center",
+                color: isSearchExpanded ? "var(--burgundy)" : "var(--theme-heading-color)",
+                transition: "all 0.2s ease",
+                background: isSearchExpanded ? "rgba(109, 31, 50, 0.1)" : "transparent"
+              }}
+              className="icon-hover-btn mobile-search-trigger-btn"
+            >
+              {isSearchExpanded ? <X size={20} /> : <Search size={20} />}
+            </button>
+
+            {/* Currency Selector (Desktop) */}
+            <div style={{ position: "relative" }} className="currency-selector currency-selector-desktop">
               <button
                 onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
                 style={{
@@ -588,7 +637,8 @@ export default function Navbar() {
                   padding: "0.4rem 0.75rem",
                   borderRadius: "7px",
                   border: "1px solid rgba(185, 154, 91, 0.35)",
-                  backgroundColor: "var(--theme-bg-card)"
+                  backgroundColor: "var(--theme-bg-card)",
+                  cursor: "pointer"
                 }}
               >
                 <span>{currency}</span>
@@ -628,7 +678,9 @@ export default function Navbar() {
                         justifyContent: "space-between",
                         backgroundColor: currency === curKey ? "rgba(109, 31, 50, 0.1)" : "transparent",
                         color: currency === curKey ? "var(--burgundy)" : "var(--theme-body-color)",
-                        fontWeight: currency === curKey ? 700 : 400
+                        fontWeight: currency === curKey ? 700 : 400,
+                        border: "none",
+                        cursor: "pointer"
                       }}
                     >
                       <span>{curVal.label}</span>
@@ -656,16 +708,16 @@ export default function Navbar() {
                 transition: "all 0.3s ease",
                 cursor: "pointer"
               }}
-              className="icon-hover-btn"
+              className="icon-hover-btn theme-toggle-btn"
             >
               {theme === "dark" ? (
-                <Sun size={21} color="#D5BA82" />
+                <Sun size={20} color="#D5BA82" />
               ) : (
-                <Moon size={21} color="var(--burgundy)" />
+                <Moon size={20} color="var(--burgundy)" />
               )}
             </button>
 
-            {/* Replay Saree Drape Opening Button */}
+            {/* Replay Saree Drape Opening Button (Desktop) */}
             <button
               onClick={triggerDrapeOpening}
               aria-label="Replay Saree Drape Opening"
@@ -682,7 +734,7 @@ export default function Navbar() {
                 transition: "all 0.3s ease",
                 cursor: "pointer"
               }}
-              className="icon-hover-btn"
+              className="icon-hover-btn replay-drape-btn"
             >
               <RotateCcw size={18} />
             </button>
@@ -698,17 +750,21 @@ export default function Navbar() {
                 color: "var(--theme-heading-color)",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                background: "none",
+                border: "none",
+                cursor: "pointer"
               }}
-              className="icon-hover-btn"
+              className="icon-hover-btn wishlist-btn"
             >
               <Heart
-                size={21}
+                size={20}
                 fill={wishlist.length > 0 ? "var(--muted-gold)" : "none"}
                 color="var(--theme-heading-color)"
               />
               {wishlist.length > 0 && (
                 <span
+                  className="wishlist-badge"
                   style={{
                     position: "absolute",
                     top: "1px",
@@ -717,8 +773,8 @@ export default function Navbar() {
                     color: "#FAF5EB",
                     fontSize: "0.72rem",
                     fontWeight: 700,
-                    width: "19px",
-                    height: "19px",
+                    width: "18px",
+                    height: "18px",
                     borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",
@@ -745,11 +801,14 @@ export default function Navbar() {
                 color: "#FAF5EB",
                 borderRadius: "28px",
                 boxShadow: "var(--shadow-burgundy)",
-                transition: "all 0.3s ease"
+                transition: "all 0.3s ease",
+                border: "none",
+                cursor: "pointer",
+                flexShrink: 0
               }}
-              className="gold-shimmer-btn"
+              className="gold-shimmer-btn cart-btn"
             >
-              <ShoppingBag size={18} color="var(--muted-gold-light)" />
+              <ShoppingBag size={17} color="var(--muted-gold-light)" />
               <span
                 style={{
                   fontSize: "0.9rem",
@@ -761,6 +820,7 @@ export default function Navbar() {
                 Bag
               </span>
               <span
+                className="cart-badge"
                 style={{
                   backgroundColor: "var(--muted-gold)",
                   color: "#FAF5EB",
@@ -782,14 +842,206 @@ export default function Navbar() {
               style={{
                 display: "none",
                 padding: "0.45rem",
-                color: "var(--burgundy)"
+                color: "var(--burgundy)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                borderRadius: "6px"
               }}
               aria-label="Toggle navigation menu"
             >
-              {isMobileMenuOpen ? <X size={27} /> : <Menu size={27} />}
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
+
+        {/* Mobile Full-Width Search Dropdown Bar */}
+        {isSearchExpanded && (
+          <div
+            className="mobile-search-dropdown-bar"
+            style={{
+              backgroundColor: "var(--theme-bg-header)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderBottom: "1.5px solid var(--muted-gold)",
+              padding: "0.6rem 0.85rem",
+              position: "relative",
+              zIndex: 105,
+              animation: "fadeInScale 0.2s ease",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+              width: "100%",
+              boxSizing: "border-box"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "var(--theme-bg-card)",
+                border: "1px solid var(--muted-gold)",
+                borderRadius: "22px",
+                padding: "0.4rem 0.85rem",
+                width: "100%",
+                gap: "0.5rem",
+                boxSizing: "border-box"
+              }}
+            >
+              <Search size={16} color="var(--burgundy)" style={{ flexShrink: 0 }} />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search silk, kurtas, lehengas..."
+                autoFocus
+                style={{
+                  border: "none",
+                  outline: "none",
+                  backgroundColor: "transparent",
+                  fontSize: "0.85rem",
+                  color: "var(--theme-body-color)",
+                  width: "100%",
+                  minWidth: 0,
+                  fontFamily: "var(--font-sans)"
+                }}
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: "0.2rem",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center"
+                  }}
+                >
+                  <X size={15} color="var(--theme-muted-color)" />
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSearchExpanded(false);
+                  setSearchQuery("");
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "var(--burgundy)",
+                  fontSize: "0.82rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  paddingLeft: "0.4rem",
+                  borderLeft: "1px solid rgba(185, 154, 91, 0.3)",
+                  whiteSpace: "nowrap"
+                }}
+              >
+                Close
+              </button>
+            </div>
+
+            {/* Mobile Search Results list */}
+            {searchResults.length > 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: "0.75rem",
+                  right: "0.75rem",
+                  backgroundColor: "var(--theme-bg-elevated)",
+                  backdropFilter: "blur(16px)",
+                  border: "1.5px solid var(--muted-gold)",
+                  borderRadius: "14px",
+                  boxShadow: "var(--shadow-lg)",
+                  padding: "0.6rem 0",
+                  zIndex: 150,
+                  animation: "fadeInScale 0.2s ease",
+                  maxHeight: "60vh",
+                  overflowY: "auto",
+                  marginTop: "4px"
+                }}
+              >
+                <div
+                  style={{
+                    padding: "0.4rem 1rem",
+                    fontSize: "0.72rem",
+                    fontFamily: "var(--font-serif-royal)",
+                    color: "var(--muted-gold-dark)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    borderBottom: "1px solid rgba(185, 154, 91, 0.2)"
+                  }}
+                >
+                  Matching Masterpieces ({searchResults.length})
+                </div>
+                {searchResults.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => {
+                      setQuickViewProduct(item);
+                      setIsSearchExpanded(false);
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.8rem",
+                      padding: "0.55rem 1rem",
+                      cursor: "pointer",
+                      borderBottom: "1px solid rgba(185, 154, 91, 0.1)"
+                    }}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      style={{
+                        width: "36px",
+                        height: "46px",
+                        borderRadius: "4px",
+                        objectFit: "cover",
+                        flexShrink: 0
+                      }}
+                    />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontSize: "0.82rem",
+                          fontWeight: 600,
+                          color: "var(--theme-heading-color)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis"
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "0.7rem",
+                          color: "var(--theme-muted-color)"
+                        }}
+                      >
+                        {item.department} • {item.subcategory}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.82rem",
+                        fontWeight: 700,
+                        color: "var(--theme-heading-color)",
+                        flexShrink: 0
+                      }}
+                    >
+                      ${item.priceUSD}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Desktop Dropdown OUTFITS Mega-Menu Container */}
         <OutfitsMegaMenu
@@ -803,16 +1055,19 @@ export default function Navbar() {
         {/* Mobile Slide-down Accordion Menu */}
         {isMobileMenuOpen && (
           <div
+            className="mobile-accordion-menu"
             style={{
               backgroundColor: "var(--theme-bg-card)",
               borderBottom: "2px solid var(--muted-gold)",
-              padding: "1.5rem 1.5rem 2rem",
-              maxHeight: "82vh",
+              padding: "1.2rem 1.1rem 2.2rem",
+              maxHeight: "84vh",
               overflowY: "auto",
-              animation: "fadeInScale 0.25s ease"
+              animation: "fadeInScale 0.25s ease",
+              width: "100%",
+              boxSizing: "border-box"
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
               {/* OUTFITS Expandable Accordion */}
               <div
                 style={{
@@ -832,14 +1087,14 @@ export default function Navbar() {
                 >
                   <span
                     style={{
-                      fontSize: "1.15rem",
+                      fontSize: "1.1rem",
                       fontFamily: "var(--font-serif-royal)",
                       color: "var(--theme-heading-color)",
                       fontWeight: 700,
                       letterSpacing: "0.06em"
                     }}
                   >
-                    OUTFITS
+                    COLLECTIONS & OUTFITS
                   </span>
                   <ChevronDown
                     size={18}
@@ -856,7 +1111,7 @@ export default function Navbar() {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "0.6rem",
+                      gap: "0.55rem",
                       paddingTop: "0.4rem"
                     }}
                   >
@@ -869,7 +1124,7 @@ export default function Navbar() {
                             backgroundColor: "rgba(185, 154, 91, 0.05)",
                             borderRadius: "10px",
                             border: "1px solid rgba(185, 154, 91, 0.2)",
-                            padding: "0.5rem 0.8rem"
+                            padding: "0.5rem 0.75rem"
                           }}
                         >
                           <div
@@ -879,17 +1134,18 @@ export default function Navbar() {
                               alignItems: "center",
                               justifyContent: "space-between",
                               cursor: "pointer",
-                              padding: "0.3rem 0"
+                              padding: "0.25rem 0"
                             }}
                           >
-                            <div>
+                            <div style={{ minWidth: 0, flex: 1, paddingRight: "0.5rem" }}>
                               <span
                                 style={{
-                                  fontSize: "0.88rem",
+                                  fontSize: "0.86rem",
                                   fontFamily: "var(--font-serif-royal)",
                                   fontWeight: 700,
                                   color: "var(--theme-heading-color)",
-                                  letterSpacing: "0.06em"
+                                  letterSpacing: "0.06em",
+                                  display: "block"
                                 }}
                               >
                                 {group.title}
@@ -898,7 +1154,10 @@ export default function Navbar() {
                                 style={{
                                   display: "block",
                                   fontSize: "0.68rem",
-                                  color: "var(--muted-gold-dark)"
+                                  color: "var(--muted-gold-dark)",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis"
                                 }}
                               >
                                 {group.tagline}
@@ -908,7 +1167,8 @@ export default function Navbar() {
                               size={15}
                               style={{
                                 transform: isGroupExpanded ? "rotate(180deg)" : "rotate(0deg)",
-                                transition: "transform 0.2s"
+                                transition: "transform 0.2s",
+                                flexShrink: 0
                               }}
                               color="var(--muted-gold)"
                             />
@@ -947,7 +1207,7 @@ export default function Navbar() {
                                 style={{
                                   display: "grid",
                                   gridTemplateColumns: "1fr 1fr",
-                                  gap: "0.4rem",
+                                  gap: "0.35rem",
                                   marginTop: "0.4rem"
                                 }}
                               >
@@ -961,12 +1221,13 @@ export default function Navbar() {
                                     }}
                                     style={{
                                       textAlign: "left",
-                                      fontSize: "0.8rem",
+                                      fontSize: "0.78rem",
                                       color: "var(--theme-body-color)",
-                                      padding: "0.25rem 0.2rem",
+                                      padding: "0.3rem 0.2rem",
                                       background: "none",
                                       border: "none",
-                                      cursor: "pointer"
+                                      cursor: "pointer",
+                                      wordBreak: "break-word"
                                     }}
                                   >
                                     • {cat.name}
@@ -984,33 +1245,223 @@ export default function Navbar() {
 
               {/* Bespoke Studio Mobile Link */}
               <button
+                type="button"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsFabricStudioOpen(true);
                 }}
                 style={{
                   textAlign: "left",
-                  fontSize: "1.05rem",
+                  fontSize: "1rem",
                   fontFamily: "var(--font-serif-display)",
                   color: "var(--burgundy)",
                   fontWeight: 700,
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.5rem",
-                  padding: "0.6rem 0"
+                  gap: "0.6rem",
+                  padding: "0.5rem 0",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer"
                 }}
               >
                 <Scissors size={18} color="var(--muted-gold)" />
                 Bespoke Drape Studio
               </button>
+
+              {/* AI Virtual Trial Room Mobile CTA */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  if (setIsAITrialRoomOpen) {
+                    setIsAITrialRoomOpen(true);
+                  }
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "0.65rem 0.85rem",
+                  borderRadius: "10px",
+                  border: "1.5px solid var(--muted-gold)",
+                  backgroundColor: "rgba(109, 31, 50, 0.08)",
+                  color: "var(--burgundy)",
+                  fontSize: "0.86rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  width: "100%"
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <Sparkles size={16} color="var(--muted-gold)" />
+                  <span>AI Virtual Trial Room</span>
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.68rem",
+                    backgroundColor: "var(--burgundy)",
+                    color: "#FAF5EB",
+                    padding: "0.15rem 0.45rem",
+                    borderRadius: "10px",
+                    fontWeight: 700,
+                    letterSpacing: "0.05em"
+                  }}
+                >
+                  TRY ON
+                </span>
+              </button>
+
+              {/* Replay Saree Drape Ceremony (Mobile) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  triggerDrapeOpening();
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.6rem",
+                  padding: "0.65rem 0.85rem",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(185, 154, 91, 0.3)",
+                  backgroundColor: "rgba(185, 154, 91, 0.08)",
+                  color: "var(--theme-heading-color)",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  textAlign: "left",
+                  width: "100%"
+                }}
+              >
+                <RotateCcw size={16} color="var(--muted-gold-dark)" />
+                <span>Replay Saree Drape Ceremony</span>
+              </button>
+
+              {/* Atelier Size Guide (Mobile) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsSizeGuideOpen(true);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.6rem",
+                  padding: "0.65rem 0.85rem",
+                  borderRadius: "10px",
+                  border: "1px solid rgba(185, 154, 91, 0.3)",
+                  backgroundColor: "var(--theme-bg-card)",
+                  color: "var(--theme-heading-color)",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  textAlign: "left",
+                  width: "100%"
+                }}
+              >
+                <Sparkles size={16} color="var(--muted-gold-dark)" />
+                <span>Atelier Size & Fitting Guide</span>
+              </button>
+
+              {/* Currency & Region Switcher (Mobile) */}
+              <div
+                style={{
+                  padding: "0.8rem",
+                  borderRadius: "12px",
+                  backgroundColor: "rgba(185, 154, 91, 0.06)",
+                  border: "1px solid rgba(185, 154, 91, 0.25)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.55rem",
+                  marginTop: "0.3rem"
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span
+                    style={{
+                      fontSize: "0.72rem",
+                      fontFamily: "var(--font-serif-royal)",
+                      color: "var(--muted-gold-dark)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      fontWeight: 700
+                    }}
+                  >
+                    Select Currency
+                  </span>
+                  <span style={{ fontSize: "0.74rem", color: "var(--burgundy)", fontWeight: 700 }}>
+                    Active: {currency}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gap: "0.4rem"
+                  }}
+                >
+                  {Object.entries(CURRENCIES).map(([curKey, curVal]) => (
+                    <button
+                      key={curKey}
+                      type="button"
+                      onClick={() => setCurrency(curKey)}
+                      style={{
+                        padding: "0.45rem 0.4rem",
+                        borderRadius: "8px",
+                        border: currency === curKey ? "1.5px solid var(--burgundy)" : "1px solid rgba(185, 154, 91, 0.25)",
+                        backgroundColor: currency === curKey ? "var(--burgundy)" : "var(--theme-bg-card)",
+                        color: currency === curKey ? "#FAF5EB" : "var(--theme-body-color)",
+                        fontWeight: currency === curKey ? 700 : 500,
+                        fontSize: "0.76rem",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        textAlign: "center"
+                      }}
+                    >
+                      {curVal.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Promo Announcement in Mobile Menu */}
+              <div
+                style={{
+                  padding: "0.75rem",
+                  borderRadius: "10px",
+                  backgroundColor: "rgba(109, 31, 50, 0.06)",
+                  border: "1px dashed var(--muted-gold)",
+                  textAlign: "center",
+                  fontSize: "0.74rem",
+                  color: "var(--theme-heading-color)",
+                  marginTop: "0.2rem"
+                }}
+              >
+                <div>✦ Code: <strong style={{ color: "var(--burgundy)" }}>ROYAL10</strong> for 10% Off Inaugural Orders</div>
+                <div style={{ fontSize: "0.68rem", color: "var(--muted-gold-dark)", marginTop: "2px" }}>
+                  White-Glove Delivery on orders over $500
+                </div>
+              </div>
             </div>
           </div>
         )}
       </header>
 
       <style>{`
+        /* Responsive Desktop Rules */
+        .mobile-search-dropdown-bar {
+          display: none;
+        }
+
+        /* Responsive Breakpoint 980px */
         @media (max-width: 980px) {
           .desktop-nav {
+            display: none !important;
+          }
+          .outfits-mega-menu-container {
             display: none !important;
           }
           .mobile-menu-btn {
@@ -1020,9 +1471,158 @@ export default function Navbar() {
             display: none !important;
           }
           .cart-label {
-            display: none;
+            display: none !important;
           }
         }
+
+        /* Responsive Breakpoint 768px (Mobile & Small Tablets) */
+        @media (max-width: 768px) {
+          .announcement-bar {
+            padding: 0.42rem 0.6rem !important;
+            font-size: 0.72rem !important;
+          }
+          .announcement-bar-content {
+            justify-content: center !important;
+            text-align: center !important;
+          }
+          .announcement-text {
+            justify-content: center !important;
+            white-space: normal !important;
+            line-height: 1.3 !important;
+            gap: 0.4rem !important;
+          }
+          .announcement-text span {
+            font-size: 0.72rem !important;
+            letter-spacing: 0.03em !important;
+          }
+
+          .navbar-inner {
+            padding: 0.55rem 0.85rem !important;
+            gap: 0.5rem !important;
+          }
+
+          .brand-logo-container {
+            gap: 0.55rem !important;
+            min-width: 0 !important;
+            flex-shrink: 1 !important;
+          }
+          .navbar-logo-circle {
+            width: 40px !important;
+            height: 40px !important;
+            min-width: 40px !important;
+          }
+          .navbar-logo-circle img {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .brand-logo-title {
+            font-size: 1.45rem !important;
+            letter-spacing: 0.08em !important;
+          }
+          .brand-logo-subtitle {
+            font-size: 0.58rem !important;
+            letter-spacing: 0.12em !important;
+            margin-top: 1px !important;
+          }
+
+          .navbar-actions {
+            gap: 0.4rem !important;
+            flex-shrink: 0 !important;
+          }
+          .search-wrapper-desktop {
+            display: none !important;
+          }
+          .mobile-search-trigger-btn {
+            display: flex !important;
+            padding: 0.38rem !important;
+          }
+          .currency-selector-desktop {
+            display: none !important;
+          }
+          .replay-drape-btn {
+            display: none !important;
+          }
+          .theme-toggle-btn {
+            padding: 0.38rem !important;
+          }
+          .wishlist-btn {
+            padding: 0.38rem !important;
+          }
+          .wishlist-badge {
+            width: 17px !important;
+            height: 17px !important;
+            font-size: 0.65rem !important;
+            top: 0 !important;
+            right: 0 !important;
+          }
+          .cart-btn {
+            padding: 0.38rem 0.65rem !important;
+            gap: 0.3rem !important;
+          }
+          .cart-badge {
+            padding: 0.1rem 0.38rem !important;
+            font-size: 0.7rem !important;
+            margin-left: 0 !important;
+          }
+          .mobile-menu-btn {
+            padding: 0.38rem !important;
+          }
+
+          .mobile-search-dropdown-bar {
+            display: block !important;
+          }
+        }
+
+        /* Responsive Breakpoint 400px (Compact Mobile Phones) */
+        @media (max-width: 400px) {
+          .navbar-inner {
+            padding: 0.45rem 0.55rem !important;
+            gap: 0.3rem !important;
+          }
+          .brand-logo-container {
+            gap: 0.45rem !important;
+          }
+          .navbar-logo-circle {
+            width: 36px !important;
+            height: 36px !important;
+            min-width: 36px !important;
+          }
+          .navbar-logo-circle img {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .brand-logo-title {
+            font-size: 1.3rem !important;
+            letter-spacing: 0.06em !important;
+          }
+          .brand-logo-subtitle {
+            font-size: 0.52rem !important;
+            letter-spacing: 0.1em !important;
+          }
+          .navbar-actions {
+            gap: 0.25rem !important;
+          }
+          .icon-hover-btn {
+            padding: 0.3rem !important;
+          }
+          .cart-btn {
+            padding: 0.32rem 0.5rem !important;
+          }
+          .mobile-menu-btn {
+            padding: 0.3rem !important;
+          }
+        }
+
+        /* Responsive Breakpoint 340px (Ultra-compact Viewports) */
+        @media (max-width: 340px) {
+          .brand-logo-subtitle {
+            display: none !important;
+          }
+          .brand-logo-title {
+            font-size: 1.18rem !important;
+          }
+        }
+
         .nav-link:hover {
           color: var(--burgundy) !important;
         }
